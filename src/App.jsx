@@ -1,7 +1,8 @@
 import React from 'react';
+import { MainView } from './views/main-view/main-view.jsx';
 
 const App = () => {
-  return <h1>Hello from App</h1>;
+  return <MainView />;
 };
 
 export default App;
