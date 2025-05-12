@@ -4,4 +4,5 @@ import App from './App.jsx';
 import './index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+console.log("index.jsx loaded");
 root.render(<App />);
