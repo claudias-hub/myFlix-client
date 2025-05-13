@@ -9,25 +9,25 @@ export const MainView = () => {
 
   const movies = [
     {
-      Title: 'Inception',
-      Description: 'A mind-bending thriller...',
-      ImagePath: 'https://m.media-amazon.com/images/I/51NbVEuw1HL._AC_.jpg',
-      Genre: { Name: 'Sci-Fi' },
-      Director: { Name: 'Christopher Nolan' }
+      title: 'Inception',
+      description: 'A mind-bending thriller...',
+      imageURL: 'https://m.media-amazon.com/images/I/51NbVEuw1HL._AC_.jpg',
+      genre: { name: 'Sci-Fi' },
+      director: { name: 'Christopher Nolan' }
     },
     {
-      Title: 'Interstellar',
-      Description: 'Journey through space and time.',
-      ImagePath: 'https://m.media-amazon.com/images/I/71n58V4zH-L._AC_SY679_.jpg',
-      Genre: { Name: 'Sci-Fi' },
-      Director: { Name: 'Christopher Nolan' }
+      title: 'Interstellar',
+      description: 'Journey through space and time.',
+      imageURL: 'https://m.media-amazon.com/images/I/71n58V4zH-L._AC_SY679_.jpg',
+      genre: { name: 'Sci-Fi' },
+      director: { name: 'Christopher Nolan' }
     },
     {
-      Title: 'The Matrix',
-      Description: 'Reality is an illusion.',
-      ImagePath: 'https://m.media-amazon.com/images/I/51EG732BV3L.jpg',
-      Genre: { Name: 'Action' },
-      Director: { Name: 'The Wachowskis' }
+      title: 'The Matrix',
+      description: 'Reality is an illusion.',
+      imageURL: 'https://m.media-amazon.com/images/I/51EG732BV3L.jpg',
+      genre: { name: 'Action' },
+      director: { name: 'The Wachowskis' }
     }
   ];
 
@@ -45,7 +45,7 @@ export const MainView = () => {
       <h1>Movie List</h1>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.Title}
+          key={movie.title}
           movie={movie}
           onMovieClick={(movie) => setSelectedMovie(movie)}
         />

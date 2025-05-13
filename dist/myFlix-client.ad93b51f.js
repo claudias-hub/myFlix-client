@@ -16150,36 +16150,36 @@ const MainView = ()=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     const movies = [
         {
-            Title: 'Inception',
-            Description: 'A mind-bending thriller...',
-            ImagePath: 'https://m.media-amazon.com/images/I/51NbVEuw1HL._AC_.jpg',
-            Genre: {
-                Name: 'Sci-Fi'
+            title: 'Inception',
+            description: 'A mind-bending thriller...',
+            imageURL: 'https://m.media-amazon.com/images/I/51NbVEuw1HL._AC_.jpg',
+            genre: {
+                name: 'Sci-Fi'
             },
-            Director: {
-                Name: 'Christopher Nolan'
+            director: {
+                name: 'Christopher Nolan'
             }
         },
         {
-            Title: 'Interstellar',
-            Description: 'Journey through space and time.',
-            ImagePath: 'https://m.media-amazon.com/images/I/71n58V4zH-L._AC_SY679_.jpg',
-            Genre: {
-                Name: 'Sci-Fi'
+            title: 'Interstellar',
+            description: 'Journey through space and time.',
+            imageURL: 'https://m.media-amazon.com/images/I/71n58V4zH-L._AC_SY679_.jpg',
+            genre: {
+                name: 'Sci-Fi'
             },
-            Director: {
-                Name: 'Christopher Nolan'
+            director: {
+                name: 'Christopher Nolan'
             }
         },
         {
-            Title: 'The Matrix',
-            Description: 'Reality is an illusion.',
-            ImagePath: 'https://m.media-amazon.com/images/I/51EG732BV3L.jpg',
-            Genre: {
-                Name: 'Action'
+            title: 'The Matrix',
+            description: 'Reality is an illusion.',
+            imageURL: 'https://m.media-amazon.com/images/I/51EG732BV3L.jpg',
+            genre: {
+                name: 'Action'
             },
-            Director: {
-                Name: 'The Wachowskis'
+            director: {
+                name: 'The Wachowskis'
             }
         }
     ];
@@ -16203,7 +16203,7 @@ const MainView = ()=>{
             movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCardJsx.MovieCard), {
                     movie: movie,
                     onMovieClick: (movie)=>setSelectedMovie(movie)
-                }, movie.Title, false, {
+                }, movie.title, false, {
                     fileName: "src/views/main-view/main-view.jsx",
                     lineNumber: 47,
                     columnNumber: 9
@@ -16250,15 +16250,15 @@ const MovieCard = ({ movie, onMovieClick })=>{
         },
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-                children: movie.Title
+                children: movie.title
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
                 lineNumber: 7,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                src: movie.ImagePath,
-                alt: movie.Title,
+                src: movie.imageURL,
+                alt: movie.title,
                 style: {
                     width: '200px'
                 }
@@ -18609,15 +18609,15 @@ const MovieView = ({ movie, onBackClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                children: movie.Title
+                children: movie.title
             }, void 0, false, {
                 fileName: "src/views/movie-view/movie-view.jsx",
                 lineNumber: 6,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                src: movie.ImagePath,
-                alt: movie.Title,
+                src: movie.imageURL,
+                alt: movie.title,
                 style: {
                     width: '200px'
                 }
@@ -18636,7 +18636,7 @@ const MovieView = ({ movie, onBackClick })=>{
                         columnNumber: 10
                     }, undefined),
                     " ",
-                    movie.Description
+                    movie.description
                 ]
             }, void 0, true, {
                 fileName: "src/views/movie-view/movie-view.jsx",
@@ -18653,7 +18653,7 @@ const MovieView = ({ movie, onBackClick })=>{
                         columnNumber: 10
                     }, undefined),
                     " ",
-                    movie.Genre.Name
+                    movie.genre.name
                 ]
             }, void 0, true, {
                 fileName: "src/views/movie-view/movie-view.jsx",
@@ -18670,7 +18670,7 @@ const MovieView = ({ movie, onBackClick })=>{
                         columnNumber: 10
                     }, undefined),
                     " ",
-                    movie.Director.Name
+                    movie.director.name
                 ]
             }, void 0, true, {
                 fileName: "src/views/movie-view/movie-view.jsx",
