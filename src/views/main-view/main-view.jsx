@@ -1,63 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MovieCard } from '../../components/movie-card/movie-card.jsx';
 import { MovieView } from '../movie-view/movie-view.jsx';
+import PropTypes from 'prop-types';
+
 
 export const MainView = () => {
-  console.log("MainView rendered"); // ✅
-
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [movies, setMovies] = useState([]);
 
-  const movies = [
-    {
-      title: 'Inception',
-      description: 'A mind-bending thriller...',
-      imageURL: 'https://m.media-amazon.com/images/I/51NbVEuw1HL._AC_.jpg',
-      genre: {
-        name: 'Sci-Fi',
-        description: 'Science fiction genre involving futuristic elements.'
-      },
-      director: {
-        name: 'Christopher Nolan',
-        bio: 'British-American filmmaker known for complex storytelling.',
-        birthYear: 1970,
-        deathYear: null
-      },
-      featured: true
-    },
-    {
-      title: 'Interstellar',
-      description: 'Journey through space and time.',
-      imageURL: 'https://m.media-amazon.com/images/I/71n58V4zH-L._AC_SY679_.jpg',
-      genre: {
-        name: 'Sci-Fi',
-        description: 'Science fiction genre involving astronauts and time traveling.'
-      },
-      director: {
-        name: 'Christopher Nolan',
-        bio: 'British-American filmmaker known for complex storytelling.',
-        birthYear: 1970,
-        deathYear: null
-      },
-      featured: true
-    },
-    {
-      title: 'The Matrix',
-      description: 'Reality is an illusion.',
-      imageURL: 'https://m.media-amazon.com/images/I/51EG732BV3L.jpg',
-      genre: {
-        name: 'Action',
-        description: 'Science fiction genre involving virtual reality.'
-      },
-      director: {
-        name: 'The Wachowskis',
-        bio: 'American film and television directors, writers and producers',
-        birthYear: 1965,
-        deathYear: null
-      },
-      featured: true
-    },
-  ];
-
+  useEffect(() => {
+    fetch("https://movie-api-w67x.onrender.com/movies") // ✅ Replace with your API endpoint
+      .then((response) => response.json())
+      .then((data) => {
+        setMovies(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+      });
+  }, []);
 
   if (selectedMovie) {
     return (
@@ -71,13 +31,17 @@ export const MainView = () => {
   return (
     <div>
       <h1>Movie List</h1>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.title}
-          movie={movie}
-          onMovieClick={(movie) => setSelectedMovie(movie)}
-        />
-      ))}
+      {movies.length === 0 ? (
+        <p>The list is empty!</p>
+      ) : (
+        movies.map((movie) => (
+          <MovieCard
+            key={movie._id} // or movie.title if _id doesn't exist
+            movie={movie}
+            onMovieClick={(movie) => setSelectedMovie(movie)}
+          />
+        ))
+      )}
     </div>
   );
 };
