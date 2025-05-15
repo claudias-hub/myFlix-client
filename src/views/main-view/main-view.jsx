@@ -9,10 +9,11 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch("https://movie-api-w67x.onrender.com/movies") // ✅ Replace with your API endpoint
+    fetch("https://movie-api-w67x.onrender.com/movies") 
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);
+        return data;
       })
       .catch((error) => {
         console.error("Error fetching movies:", error);
