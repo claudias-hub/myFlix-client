@@ -10,7 +10,7 @@ export const LoginView = ({ onLoggedIn }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('https://your-api.herokuapp.com/login', {
+    fetch('https://movie-api-w67x.onrender.com/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
