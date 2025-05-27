@@ -1,13 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
-    <div onClick={() => onMovieClick(movie)} style={{ border: '1px solid black', margin: '10px', padding: '10px', cursor: 'pointer',
-      maxWidth: '300px' }}>
-      <h3>{movie.title}</h3>
-      {/*<img src={movie.imageURL} alt={movie.title} style={{ width: '200px' }} />*/}
-    </div>
+    <Card
+      className="h-100"
+      onClick={() => onMovieClick(movie)}
+      style={{ cursor: 'pointer' }}
+    >
+      {/* Optional: Display image if available */}
+      {/* <Card.Img variant="top" src={movie.imageURL} alt={movie.title} /> */}
+
+      <Card.Body>
+        <Card.Title>{movie.title}</Card.Title>
+        {/* Optional: Add a short description or genre */}
+        {/* <Card.Text>{movie.description?.slice(0, 100)}...</Card.Text> */}
+      </Card.Body>
+    </Card>
   );
 };
 
