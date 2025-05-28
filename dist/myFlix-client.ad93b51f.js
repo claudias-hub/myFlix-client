@@ -684,30 +684,23 @@ var _appJsx = require("./App.jsx");
 var _appJsxDefault = parcelHelpers.interopDefault(_appJsx);
 var _indexScss = require("./index.scss");
 var _bootstrapMinCss = require("bootstrap/dist/css/bootstrap.min.css");
-var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 const root = (0, _clientDefault.default).createRoot(document.getElementById('root'));
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactDefault.default).StrictMode, {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
-            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appJsxDefault.default), {}, void 0, false, {
-                fileName: "src/index.jsx",
-                lineNumber: 15,
-                columnNumber: 9
-            }, undefined)
-        }, void 0, false, {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appJsxDefault.default), {}, void 0, false, {
             fileName: "src/index.jsx",
-            lineNumber: 14,
-            columnNumber: 7
+            lineNumber: 13,
+            columnNumber: 9
         }, undefined)
     }, void 0, false, {
         fileName: "src/index.jsx",
-        lineNumber: 13,
+        lineNumber: 12,
         columnNumber: 5
     }, undefined)
 }, void 0, false, {
     fileName: "src/index.jsx",
-    lineNumber: 12,
+    lineNumber: 11,
     columnNumber: 3
 }, undefined));
 
@@ -716,7 +709,7 @@ root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Browser
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-dom/client":"hrvwu","./App.jsx":"f8V2Q","./index.scss":"lJZlQ","bootstrap/dist/css/bootstrap.min.css":"i5LP7","react-bootstrap":"ctEhb","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dVPUn":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-dom/client":"hrvwu","./App.jsx":"f8V2Q","./index.scss":"lJZlQ","bootstrap/dist/css/bootstrap.min.css":"i5LP7","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dVPUn":[function(require,module,exports,__globalThis) {
 'use strict';
 module.exports = require("ee51401569654d91");
 
@@ -16131,6 +16124,7 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _mainView = require("./components/main-view/main-view");
 var _loginView = require("./components/login-view/login-view");
 var _reactRouterDom = require("react-router-dom");
+var _reactBootstrap = require("react-bootstrap");
 var _s = $RefreshSig$();
 const App = ()=>{
     _s();
@@ -16147,7 +16141,7 @@ const App = ()=>{
         setToken(null);
         localStorage.clear();
     };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -16158,19 +16152,19 @@ const App = ()=>{
                         onLoggedOut: handleLogout
                     }, void 0, false, {
                         fileName: "src/App.jsx",
-                        lineNumber: 34,
+                        lineNumber: 35,
                         columnNumber: 15
                     }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                         to: "/login",
                         replace: true
                     }, void 0, false, {
                         fileName: "src/App.jsx",
-                        lineNumber: 36,
+                        lineNumber: 37,
                         columnNumber: 15
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/App.jsx",
-                    lineNumber: 30,
+                    lineNumber: 31,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -16179,23 +16173,23 @@ const App = ()=>{
                         onLoggedIn: onLoggedIn
                     }, void 0, false, {
                         fileName: "src/App.jsx",
-                        lineNumber: 40,
+                        lineNumber: 41,
                         columnNumber: 39
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/App.jsx",
-                    lineNumber: 40,
+                    lineNumber: 41,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/App.jsx",
-            lineNumber: 29,
+            lineNumber: 30,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/App.jsx",
-        lineNumber: 28,
+        lineNumber: 29,
         columnNumber: 5
     }, undefined);
 };
@@ -16210,7 +16204,7 @@ $RefreshReg$(_c, "App");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./components/main-view/main-view":"etjHZ","./components/login-view/login-view":"8ru9P","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"etjHZ":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./components/main-view/main-view":"etjHZ","./components/login-view/login-view":"8ru9P","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","react-bootstrap":"ctEhb"}],"etjHZ":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$53bb = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$53bb.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -16313,6 +16307,7 @@ const MainView = ()=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                 variant: "danger",
                 onClick: handleLogout,
+                className: "logout-button",
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
@@ -23646,7 +23641,7 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 const MovieCard = ({ movie, onMovieClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
-        className: "h-100",
+        className: "h-100 movie-card-custom",
         onClick: ()=>onMovieClick(movie),
         style: {
             cursor: 'pointer'

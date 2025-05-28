@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { MainView } from "./components/main-view/main-view";
 import { LoginView } from "./components/login-view/login-view";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Container } from 'react-bootstrap';
 
 const App = () => {
   const [user, setUser] = useState(
@@ -25,7 +26,7 @@ const App = () => {
   };
 
   return (
-    <BrowserRouter>
+    <Container>
       <Routes>
         <Route
           path="/"
@@ -39,7 +40,7 @@ const App = () => {
         />
         <Route path="/login" element={<LoginView onLoggedIn={onLoggedIn} />} />
       </Routes>
-    </BrowserRouter>
+    </Container>
   );
 };
 

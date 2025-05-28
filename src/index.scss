@@ -7,3 +7,25 @@ $color: steelblue;
 .my-flix {
   color: $color;
 }
+
+.main-view {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+
+  .logout-button {
+    margin-bottom: 1.5rem;
+  }
+
+  .movie-card-custom {
+    border: 2px solid steelblue;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .movie-card-custom:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}

@@ -70,7 +70,7 @@ export const MainView = () => {
   // If user is logged in, show movies and logout button
   return (
     <div className="main-view">
-      <Button variant="danger" onClick={handleLogout}>
+      <Button variant="danger" onClick={handleLogout} className="logout-button">
         Logout
       </Button>
       {movies.length === 0 ? (

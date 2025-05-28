@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
     <Card
-      className="h-100"
+      className="h-100 movie-card-custom"
       onClick={() => onMovieClick(movie)}
       style={{ cursor: 'pointer' }}
     >
