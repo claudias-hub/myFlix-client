@@ -16,7 +16,7 @@ export const MainView = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch('https://your-api.herokuapp.com/movies', {
+    fetch('https://movie-api-w67x.onrender.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => response.json())
