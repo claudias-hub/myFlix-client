@@ -1,21 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { HeartFill } from 'react-bootstrap-icons';
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie, favoriteMovieIds = [] }) => {
+  const isFavorite = favoriteMovieIds.includes(movie._id);
+
   return (
-    <Card
-      className="h-100 movie-card-custom"
-      onClick={() => onMovieClick(movie)}
-      style={{ cursor: 'pointer' }}
-    >
-      {/* Optional: Display image if available */}
-      {/* <Card.Img variant="top" src={movie.imageURL} alt={movie.title} /> */}
-
+    <Card className="mb-4">
+      <Card.Img variant="top" src={movie.ImagePath} />
       <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
-        {/* Optional: Add a short description or genre */}
-        {/* <Card.Text>{movie.description?.slice(0, 100)}...</Card.Text> */}
+        <Card.Title className="d-flex justify-content-between align-items-center">
+          {movie.Title}
+          {isFavorite && (
+            <HeartFill color="red" title="Favorite" />
+          )}
+        </Card.Title>
+        
+        {/* This button links to the movie detail route */}
+        <Link to={`/movies/${movie._id}`}>
+          <Button variant="primary">Details</Button>
+        </Link>
       </Card.Body>
     </Card>
   );
@@ -23,19 +29,20 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    imageURL: PropTypes.string,
-    genre: PropTypes.shape({
-      name: PropTypes.string,
-      description: PropTypes.string
+    _id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string,
+    ImagePath: PropTypes.string,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string,
+      Description: PropTypes.string
     }),
-    director: PropTypes.shape({
-      name: PropTypes.string,
-      bio: PropTypes.string,
-      birthYear: PropTypes.number,
-      deathYear: PropTypes.number
+    Director: PropTypes.shape({
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      BirthYear: PropTypes.number,
+      DeathYear: PropTypes.number
     })
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  favoriteMovieIds: PropTypes.arrayOf(PropTypes.string)
 };
