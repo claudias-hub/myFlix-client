@@ -34,7 +34,7 @@ export const MainView = ({ user, token, movies, onLoggedOut, setUser }) => {
             <Col key={movie._id} sm={6} md={4} lg={3}>
               <MovieCard
                 movie={movie}
-                favoriteMovieIds={user.FavoriteMovies}
+                favoriteMovieIds={user?.FavoriteMovies || []}
                 user={user}
                 token={token}
                 setUser={setUser}

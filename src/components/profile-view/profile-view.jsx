@@ -3,10 +3,12 @@ import { Button, Form, Card, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
-  const [username, setUsername] = useState(user.Username);
+  if (!user) return <div>Loading...</div>;
+
+  const [username, setUsername] = useState(user.Username || "");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState(user.Email);
-  const [birthday, setBirthday] = useState(user.Birthday?.split("T")[0]);
+  const [email, setEmail] = useState(user.Email || "");
+  const [birthday, setBirthday] = useState(user.Birthday ? user.Birthday.split("T")[0] : "");
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const navigate = useNavigate();
 
@@ -138,9 +140,9 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
         {favoriteMovies.map((movie) => (
           <Col md={4} key={movie._id} className="mb-4">
             <Card>
-              <Card.Img variant="top" src={movie.ImagePath} />
+              <Card.Img variant="top" src={movie.imageURL} />
               <Card.Body>
-                <Card.Title>{movie.Title}</Card.Title>
+                <Card.Title>{movie.title}</Card.Title>
                 <Button
                   variant="outline-danger"
                   onClick={() => removeFavorite(movie._id)}
