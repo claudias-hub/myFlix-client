@@ -1,31 +1,75 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { Heart, HeartFill } from 'react-bootstrap-icons';
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie, favoriteMovieIds, user, token, setUser }) => {
+  const isFavorite = (favoriteMovieIds || []).includes(movie._id);
+
+  const toggleFavorite = () => {
+    const url = `https://movie-api-w67x.onrender.com/users/${user.Username}/movies/${movie._id}`;
+    const method = isFavorite ? 'DELETE' : 'POST';
+
+    fetch(url, {
+      method: method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to update favorites');
+        }
+        return response.json();
+      })
+      .then((updatedUser) => {
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        setUser(updatedUser);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert('Something went wrong updating favorites.');
+      });
+  };
+
+
   return (
-    <Card
-      className="h-100 movie-card-custom"
-      onClick={() => onMovieClick(movie)}
-      style={{ cursor: 'pointer' }}
-    >
-      {/* Optional: Display image if available */}
-      {/* <Card.Img variant="top" src={movie.imageURL} alt={movie.title} /> */}
+    <Link to={`/movies/${movie._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Card.Img
+        variant="top"
+        src={movie.imageURL}
+      />
 
       <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
-        {/* Optional: Add a short description or genre */}
-        {/* <Card.Text>{movie.description?.slice(0, 100)}...</Card.Text> */}
+        <Card.Title className="d-flex justify-content-between align-items-center">
+          <span>{movie.title}</span>
+          <span
+            onClick={(e) => {
+              e.preventDefault(); // evita que se active el link
+              e.stopPropagation(); // evita que se propague hacia el Link
+              toggleFavorite();
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            {isFavorite ? <HeartFill color="red" /> : <Heart color="gray" />}
+          </span>
+
+        </Card.Title>
+        <Button variant="primary" className="mt-2">Details</Button>
       </Card.Body>
-    </Card>
+    </Link>
+
   );
 };
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
-    imageURL: PropTypes.string,
+    imagePath: PropTypes.string,
     genre: PropTypes.shape({
       name: PropTypes.string,
       description: PropTypes.string
@@ -37,5 +81,8 @@ MovieCard.propTypes = {
       deathYear: PropTypes.number
     })
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  favoriteMovieIds: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
+  token: PropTypes.string.isRequired,
+  setUser: PropTypes.func.isRequired
 };

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
-// import './signup-view.scss';             // Opcional: si planeas añadir estilos
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");

@@ -7,17 +7,29 @@ export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (username.length < 3) {
+      setMessage("Username must be at least 3 characters long.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setMessage("Password must be at least 6 characters long.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+
+
     fetch("https://movie-api-w67x.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
+      body: JSON.stringify({ username, password }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -36,6 +48,9 @@ export const LoginView = ({ onLoggedIn }) => {
       })
       .catch((err) => {
         setMessage(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -50,7 +65,10 @@ export const LoginView = ({ onLoggedIn }) => {
               <Form.Control
                 type="text"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  setMessage("");
+                }}
                 placeholder="Enter username"
                 required
               />
@@ -61,7 +79,10 @@ export const LoginView = ({ onLoggedIn }) => {
               <Form.Control
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setMessage("");
+                }}
                 placeholder="Enter password"
                 required
               />
@@ -69,8 +90,8 @@ export const LoginView = ({ onLoggedIn }) => {
 
             {message && <Alert variant="danger">{message}</Alert>}
 
-            <Button variant="primary" type="submit" className="w-100">
-              Login
+            <Button variant="primary" type="submit" className="w-100"  disabled={loading} >
+              {loading ? "Logging in..." : "Login"}
             </Button>
           </Form>
         </Col>
