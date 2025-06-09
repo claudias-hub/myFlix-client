@@ -9,9 +9,6 @@ export const MovieView = ({ token }) => {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    console.log('movieId:', movieId);      
-    console.log('token:', token);
-
     fetch(`https://movie-api-w67x.onrender.com/movies/${movieId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })

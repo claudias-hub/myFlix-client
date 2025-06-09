@@ -36,31 +36,34 @@ export const MovieCard = ({ movie, favoriteMovieIds, user, token, setUser }) => 
 
 
   return (
-    <Link to={`/movies/${movie._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-      <Card.Img
-        variant="top"
-        src={movie.imageURL}
-      />
+    <Card>
+      <Link to={`/movies/${movie._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Card.Img
+          variant="top"
+          src={movie.imageURL || "https://via.placeholder.com/300x450?text=No+Image"}
+        />
+      </Link>
 
-      <Card.Body>
-        <Card.Title className="d-flex justify-content-between align-items-center">
-          <span>{movie.title}</span>
-          <span
-            onClick={(e) => {
-              e.preventDefault(); // evita que se active el link
-              e.stopPropagation(); // evita que se propague hacia el Link
-              toggleFavorite();
-            }}
-            style={{ cursor: 'pointer' }}
-          >
-            {isFavorite ? <HeartFill color="red" /> : <Heart color="gray" />}
-          </span>
+        <Card.Body>
+          <Card.Title className="d-flex justify-content-between align-items-center">
+            <span>{movie.title}</span>
+            <span
+              onClick={(e) => {
+                e.preventDefault(); // evita que se active el link
+                e.stopPropagation(); // evita que se propague hacia el Link
+                toggleFavorite();
+              }}
+              style={{ cursor: 'pointer' }}
+            >
+              {isFavorite ? <HeartFill color="red" /> : <Heart color="gray" />}
+            </span>
+          </Card.Title>
 
-        </Card.Title>
-        <Button variant="primary" className="mt-2">Details</Button>
-      </Card.Body>
-    </Link>
-
+          <Link to={`/movies/${movie._id}`}>
+              <Button variant="primary" className="mt-2">Details</Button>
+          </Link>
+        </Card.Body>
+    </Card>
   );
 };
 
@@ -69,7 +72,7 @@ MovieCard.propTypes = {
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
-    imagePath: PropTypes.string,
+    imageURL: PropTypes.string,
     genre: PropTypes.shape({
       name: PropTypes.string,
       description: PropTypes.string

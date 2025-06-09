@@ -9,11 +9,25 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Container } from 'react-bootstrap';
 
 const App = () => {
-  const [user, setUser] = useState(
-    localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user"))
-      : null
-  );
+  const isValidUser = (user) => {
+    return user && 
+    typeof user.username === "string" && 
+    typeof user.email === "string" &&
+    typeof user._id === "string" &&
+    typeof user.birthday === "string"
+  };
+
+  const storedUser = (() => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      return isValidUser(user) ? user : null;
+    } catch {
+      return null;
+    }
+  })();
+
+  
+  const [user, setUser] = useState(storedUser);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [movies, setMovies] = useState([]);
 

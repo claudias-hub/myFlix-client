@@ -29,10 +29,10 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday,
+        username: username,
+        password: password,
+        email: email,
+        birthday: birthday,
       }),
     })
       .then((response) => {
