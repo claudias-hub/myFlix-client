@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
 
 
 export const LoginView = ({ onLoggedIn }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [username, setUsername] = useState(location.state?.username || "");
+  const [password, setPassword] = useState(location.state?.password || "");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +32,7 @@ export const LoginView = ({ onLoggedIn }) => {
     setMessage("");
 
 
-    fetch("https://movie-api-w67x.onrender.com/login", {
+    fetch(`http://localhost:8080/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

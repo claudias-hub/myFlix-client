@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
+import { Row, Col, Button, Card } from "react-bootstrap";
 
-export const MovieView = ({ token }) => {
+export const MovieView = ({ token, user, onUserUpdate }) => {
   const { movieId } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch(`https://movie-api-w67x.onrender.com/movies/${movieId}`, {
+    fetch(`http://localhost:8080/movies/id/${movieId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -25,23 +25,78 @@ export const MovieView = ({ token }) => {
   if (!movie) return <div>Loading movie...</div>;
 
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', maxWidth: '400px', margin: 'auto' }}>
-      <h2>{movie.title}</h2>
-      <img
-        src={movie.imageURL}
-        alt={movie.title}
-        style={{ width: '100%', marginBottom: '10px' }}
-      />
+    <Card className="p-3">
+      <Row>
+        <Col md={4} className="text-center">
+          <Card.Img
+            variant="top"
+            src={movie.imageURL || "https://via.placeholder.com/300x450?text=No+Image"}
+            alt={`${movie.title} poster`}
+            className="small-poster"
+          />
+        </Col>
 
-      <p><strong>Description:</strong> {movie.description || 'No description available.'}</p>
-      <p><strong>Genre:</strong> {movie.genre?.name || 'Unknown genre'}</p>
-      <p><strong>Director:</strong> {movie.director?.name || 'Unknown director'}</p>
-      <Button onClick={() => navigate(-1)}>Back</Button>
-    </div>
+        <Col>
+          <Card.Body>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{movie.description}</Card.Text>
+            <Card.Text><strong>Genre:</strong> {movie.genre?.name}</Card.Text>
+            <Card.Text><strong>Director:</strong> {movie.director?.name}</Card.Text>
+            <Button
+              onClick={() => {
+                console.log("=== DEBUGGING ADD TO FAVORITES ===");
+                console.log("Username:", user.username);
+                console.log("User object completo:", user);
+                console.log("Movie ID:", movie._id);
+                console.log("Movie object completo:", movie);
+                
+                const url = `http://localhost:8080/users/${user.username}/movies/${movie._id}`;
+                console.log("URL que voy a usar:", url);
+                console.log("=== FIN DEBUGGING ===");
 
+                fetch(`http://localhost:8080/users/${user.username}/movies/${movie._id}`, {
+                  method: 'POST',
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                  }
+                })
+                  .then((response) => {
+                    console.log("Respuesta del servidor:", response.status);
+                    if (!response.ok) {
+                      throw new Error(`Error adding to favorites: ${response.status}`);
+                    }
+                    return response.json();
+                  })
+                  .then((updatedUser) => {
+                    console.log("Updated user:", updatedUser);
+                    onUserUpdate(updatedUser);
+                    alert("Movie added to favorites!");
+                  })
+                  .catch((err) => {
+                    console.error("Error completo:", err);
+                  });
+              }}
+              variant="primary"
+              className="me-2"
+            >
+              Add to Favorites
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => navigate("/")}
+              className="me-2"
+            >
+              Back
+            </Button>
+          </Card.Body>
+        </Col>
+      </Row>
+    </Card>
   );
 };
 
 MovieView.propTypes = {
-  token: PropTypes.string.isRequired
+  token: PropTypes.string.isRequired,
+  onUserUpdate: PropTypes.func.isRequired
 };

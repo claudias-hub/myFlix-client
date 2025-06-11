@@ -26,6 +26,10 @@ const App = () => {
     }
   })();
 
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+  };
   
   const [user, setUser] = useState(storedUser);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
@@ -35,7 +39,7 @@ const App = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch("https://movie-api-w67x.onrender.com/movies", {
+    fetch(`http://localhost:8080/movies`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
@@ -56,10 +60,17 @@ const App = () => {
   };
 
   const handleLogout = () => {
+    const prevUser = JSON.parse(localStorage.getItem("user"));
+    const username = prevUser?.username || "";
+    const password = ""; // no lo puedes guardar por seguridad, queda vacío
+
     setUser(null);
     setToken(null);
     localStorage.clear();
+
+    navigate("/login", { state: { username: username, password: password } });
   };
+
 
   return (
     <Container>
@@ -85,7 +96,11 @@ const App = () => {
           path="/movies/:movieId"
           element={
             user ? (
-              <MovieView user={user} token={token} />
+              <MovieView 
+                user={user} 
+                token={token}
+                onUserUpdate={updateUser}
+              />
             ) : (
               <Navigate to="/login" replace />
             )

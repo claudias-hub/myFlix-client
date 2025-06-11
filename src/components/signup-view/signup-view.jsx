@@ -14,7 +14,7 @@ export const SignupView = () => {
     e.preventDefault();
     console.log({ username, password, email, birthday });
 
-    fetch("https://movie-api-w67x.onrender.com/users", {
+    fetch(`http://localhost:8080/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -27,11 +27,15 @@ export const SignupView = () => {
       .then((res) => {
         if (res.ok) {
           setMessage("Signup successful! You can now log in.");
-          setUsername("");
-          setPassword("");
-          setEmail("");
-          setBirthday("");
-          navigate("/login");
+
+          const newUserData = {
+            username: username,
+            password: password,
+            email: email,
+            birthday: birthday
+          };
+          
+          navigate("/login", { state: newUserData });
         } else {
           return res.json().then((data) => {
             const errorMessages = data.errors?.map(err => err.msg).join(" - ");

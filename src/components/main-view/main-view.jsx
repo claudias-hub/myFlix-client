@@ -13,7 +13,7 @@ export const MainView = ({ user, token, onLoggedOut, setUser }) => {
   const [directorFilter, setDirectorFilter] = useState("");
 
   useEffect(() => {
-    fetch("https://movie-api-w67x.onrender.com/movies", {
+    fetch(`http://localhost:8080/movies`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((res) => res.json())
@@ -68,9 +68,10 @@ export const MainView = ({ user, token, onLoggedOut, setUser }) => {
         className="form-select mb-3"
       >
         <option value="">All Genres</option>
-        <option value="Action">Action</option>
+        <option value="Western">Western</option>
         <option value="Drama">Drama</option>
-        {/* Add more as needed */}
+        <option value="Spy Thriller">Spy Thriller</option>
+        <option value="Crime / Comedy">Crime / Comedy</option>
       </select>
 
       <select
@@ -79,9 +80,11 @@ export const MainView = ({ user, token, onLoggedOut, setUser }) => {
         className="form-select mb-3"
       >
         <option value="">All Directors</option>
-        <option value="Christopher Nolan">Christopher Nolan</option>
+        <option value="Harry Lachman">Harry Lachman</option>
         <option value="Quentin Tarantino">Quentin Tarantino</option>
-        {/* Add more as needed */}
+        <option value="Lana Wachowski">Lana Wachowski</option>
+        <option value="Frank Darabont">Frank Darabont</option>
+        <option value="William A. Wellman">William A. Wellman</option>
       </select>
 
       {loading ? (
