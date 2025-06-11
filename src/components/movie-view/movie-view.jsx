@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { Row, Col, Button, Card } from "react-bootstrap";
 
-export const MovieView = ({ token, user, onUserUpdate }) => {
+export const MovieView = ({ token, user, setUser }) => {
   const { movieId } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
@@ -70,7 +70,7 @@ export const MovieView = ({ token, user, onUserUpdate }) => {
                   })
                   .then((updatedUser) => {
                     console.log("Updated user:", updatedUser);
-                    onUserUpdate(updatedUser);
+                    setUser(updatedUser);
                     alert("Movie added to favorites!");
                   })
                   .catch((err) => {
@@ -98,5 +98,5 @@ export const MovieView = ({ token, user, onUserUpdate }) => {
 
 MovieView.propTypes = {
   token: PropTypes.string.isRequired,
-  onUserUpdate: PropTypes.func.isRequired
+  setUser: PropTypes.func.isRequired
 };

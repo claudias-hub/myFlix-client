@@ -38,6 +38,7 @@ const App = () => {
   // Fetch movies when token is available
   useEffect(() => {
     if (!token) return;
+    console.log("Token actual:", token);
 
     fetch(`https://movie-api-w67x.onrender.com/movies`, {
       headers: { Authorization: `Bearer ${token}` },
