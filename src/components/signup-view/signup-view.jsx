@@ -1,34 +1,45 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
 
 export const SignupView = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log({ username, password, email, birthday });
 
-    fetch("https://movie-api-w67x.onrender.com/users", {
+    fetch(`http://localhost:8080/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: username,
         password: password,
         email: email,
+        birthday: birthday,
       }),
     })
       .then((res) => {
         if (res.ok) {
           setMessage("Signup successful! You can now log in.");
-          // Clear inputs (optional)
-          setUsername("");
-          setPassword("");
-          setEmail("");
+
+          const newUserData = {
+            username: username,
+            password: password,
+            email: email,
+            birthday: birthday
+          };
+          
+          navigate("/login", { state: newUserData });
         } else {
           return res.json().then((data) => {
-            throw new Error(data.message || "Signup failed.");
+            const errorMessages = data.errors?.map(err => err.msg).join(" - ");
+            throw new Error(errorMessages || data.message || "Signup failed.");
           });
         }
       })
@@ -74,6 +85,16 @@ export const SignupView = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
+                required
+              />
+            </Form.Group>
+
+            <Form.Group controlId="signupBirthday" className="mb-3">
+              <Form.Label>Birthday</Form.Label>
+              <Form.Control
+                type="date"
+                value={birthday}
+                onChange={(e) => setBirthday(e.target.value)}
                 required
               />
             </Form.Group>

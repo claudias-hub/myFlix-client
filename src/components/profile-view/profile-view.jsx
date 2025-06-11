@@ -5,51 +5,60 @@ import { useNavigate } from "react-router-dom";
 export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
   if (!user) return <div>Loading...</div>;
 
-  const [username, setUsername] = useState(user.Username || "");
+  const [username, setUsername] = useState(user.username || "");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState(user.Email || "");
-  const [birthday, setBirthday] = useState(user.Birthday ? user.Birthday.split("T")[0] : "");
+  const [email, setEmail] = useState(user.email || "");
+  const [birthday, setBirthday] = useState(user.birthday ? user.birthday.split("T")[0] : "");
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.FavoriteMovies) {
+    if (user.favoriteMovies) {
       setFavoriteMovies(
-        movies.filter((movie) => user.FavoriteMovies.includes(movie._id))
+        movies.filter((movie) => user.favoriteMovies.includes(movie._id))
       );
     }
   }, [user, movies]);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    fetch(`https://movie-api-w67x.onrender.com/users/${user.Username}`, {
+    fetch(`http://localhost:8080/users/${user.username}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday,
+        username: username,
+        password: password,
+        email: email,
+        birthday: birthday,
       }),
     })
       .then((response) => {
         if (response.ok) {
-          alert("Profile updated successfully!");
-          location.reload();
+          return response.json(); 
         } else {
-          alert("Failed to update profile.");
+          throw new Error("Failed to update profile");
         }
       })
-      .catch((error) => console.error(error));
+      .then((updatedUser) => {
+        setUsername(updatedUser.username || "");
+        setEmail(updatedUser.email || "");
+        setBirthday(updatedUser.birthday ? updatedUser.birthday.split("T")[0] : "");
+        setPassword(""); 
+        alert("Profile updated successfully!");
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to update profile.");
+      });
   };
 
   const handleDeregister = () => {
     if (!confirm("Are you sure you want to delete your account?")) return;
 
-    fetch(`https://movie-api-w67x.onrender.com/users/${user.Username}`, {
+    fetch(`http://localhost:8080/users/${user.username}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -68,7 +77,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
 
   const removeFavorite = (movieId) => {
     fetch(
-      `https://movie-api-w67x.onrender.com/users/${user.Username}/movies/${movieId}`,
+      `http://localhost:8080/users/${user.username}/movies/${movieId}`,
       {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
