@@ -13,7 +13,7 @@ export const MainView = ({ user, token, onLoggedOut, setUser }) => {
   const [directorFilter, setDirectorFilter] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:8080/movies`, {
+    fetch(`https://movie-api-w67x.onrender.com/movies`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((res) => res.json())

@@ -39,7 +39,7 @@ const App = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch(`http://localhost:8080/movies`, {
+    fetch(`https://movie-api-w67x.onrender.com/movies`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
@@ -62,7 +62,7 @@ const App = () => {
   const handleLogout = () => {
     const prevUser = JSON.parse(localStorage.getItem("user"));
     const username = prevUser?.username || "";
-    const password = ""; // no lo puedes guardar por seguridad, queda vacío
+    const password = ""; //better empty-security
 
     setUser(null);
     setToken(null);
