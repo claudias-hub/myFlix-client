@@ -22,7 +22,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8080/users/${user.username}`, {
+    fetch(`https://movie-api-w67x.onrender.com/users/${user.username}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
   const handleDeregister = () => {
     if (!confirm("Are you sure you want to delete your account?")) return;
 
-    fetch(`http://localhost:8080/users/${user.username}`, {
+    fetch(`https://movie-api-w67x.onrender.com/users/${user.username}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
 
   const removeFavorite = (movieId) => {
     fetch(
-      `http://localhost:8080/users/${user.username}/movies/${movieId}`,
+      `https://movie-api-w67x.onrender.com/users/${user.username}/movies/${movieId}`,
       {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },

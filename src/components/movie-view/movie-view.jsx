@@ -9,7 +9,7 @@ export const MovieView = ({ token, user, onUserUpdate }) => {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/movies/id/${movieId}`, {
+    fetch(`https://movie-api-w67x.onrender.com/movies/id/${movieId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -50,11 +50,11 @@ export const MovieView = ({ token, user, onUserUpdate }) => {
                 console.log("Movie ID:", movie._id);
                 console.log("Movie object completo:", movie);
                 
-                const url = `http://localhost:8080/users/${user.username}/movies/${movie._id}`;
+                const url = `https://movie-api-w67x.onrender.com/users/${user.username}/movies/${movie._id}`;
                 console.log("URL que voy a usar:", url);
                 console.log("=== FIN DEBUGGING ===");
 
-                fetch(`http://localhost:8080/users/${user.username}/movies/${movie._id}`, {
+                fetch(`https://movie-api-w67x.onrender.com/users/${user.username}/movies/${movie._id}`, {
                   method: 'POST',
                   headers: {
                     Authorization: `Bearer ${token}`,

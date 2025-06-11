@@ -14,7 +14,7 @@ export const SignupView = () => {
     e.preventDefault();
     console.log({ username, password, email, birthday });
 
-    fetch(`http://localhost:8080/users`, {
+    fetch(`https://movie-api-w67x.onrender.com/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

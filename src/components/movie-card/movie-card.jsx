@@ -8,7 +8,7 @@ export const MovieCard = ({ movie, favoriteMovieIds, user, token, setUser }) => 
   const isFavorite = (favoriteMovieIds || []).includes(movie._id);
 
   const toggleFavorite = () => {
-    const url = `http://localhost:8080/users/${user.Username}/movies/${movie._id}`;
+    const url = `https://movie-api-w67x.onrender.com/users/${user.Username}/movies/${movie._id}`;
     const method = isFavorite ? 'DELETE' : 'POST';
 
     fetch(url, {

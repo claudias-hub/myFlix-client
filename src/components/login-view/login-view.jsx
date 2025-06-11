@@ -32,7 +32,7 @@ export const LoginView = ({ onLoggedIn }) => {
     setMessage("");
 
 
-    fetch(`http://localhost:8080/login`, {
+    fetch(`https://movie-api-w67x.onrender.com/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
