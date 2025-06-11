@@ -16153,7 +16153,8 @@ const App = ()=>{
     // Fetch movies when token is available
     (0, _react.useEffect)(()=>{
         if (!token) return;
-        fetch(`http://localhost:8080/movies`, {
+        console.log("Token actual:", token);
+        fetch(`https://movie-api-w67x.onrender.com/movies`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -16173,7 +16174,7 @@ const App = ()=>{
     const handleLogout = ()=>{
         const prevUser = JSON.parse(localStorage.getItem("user"));
         const username = prevUser?.username || "";
-        const password = ""; // no lo puedes guardar por seguridad, queda vacío
+        const password = ""; //better empty-security
         setUser(null);
         setToken(null);
         localStorage.clear();
@@ -16191,7 +16192,7 @@ const App = ()=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/App.jsx",
-                lineNumber: 77,
+                lineNumber: 78,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
@@ -16206,19 +16207,19 @@ const App = ()=>{
                             setUser: setUser
                         }, void 0, false, {
                             fileName: "src/App.jsx",
-                            lineNumber: 83,
+                            lineNumber: 84,
                             columnNumber: 15
                         }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                             to: "/login",
                             replace: true
                         }, void 0, false, {
                             fileName: "src/App.jsx",
-                            lineNumber: 91,
+                            lineNumber: 92,
                             columnNumber: 15
                         }, void 0)
                     }, void 0, false, {
                         fileName: "src/App.jsx",
-                        lineNumber: 79,
+                        lineNumber: 80,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -16229,19 +16230,19 @@ const App = ()=>{
                             onUserUpdate: updateUser
                         }, void 0, false, {
                             fileName: "src/App.jsx",
-                            lineNumber: 99,
+                            lineNumber: 100,
                             columnNumber: 15
                         }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                             to: "/login",
                             replace: true
                         }, void 0, false, {
                             fileName: "src/App.jsx",
-                            lineNumber: 105,
+                            lineNumber: 106,
                             columnNumber: 15
                         }, void 0)
                     }, void 0, false, {
                         fileName: "src/App.jsx",
-                        lineNumber: 95,
+                        lineNumber: 96,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -16253,19 +16254,19 @@ const App = ()=>{
                             onLoggedOut: handleLogout
                         }, void 0, false, {
                             fileName: "src/App.jsx",
-                            lineNumber: 113,
+                            lineNumber: 114,
                             columnNumber: 15
                         }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                             to: "/login",
                             replace: true
                         }, void 0, false, {
                             fileName: "src/App.jsx",
-                            lineNumber: 120,
+                            lineNumber: 121,
                             columnNumber: 15
                         }, void 0)
                     }, void 0, false, {
                         fileName: "src/App.jsx",
-                        lineNumber: 109,
+                        lineNumber: 110,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -16274,36 +16275,36 @@ const App = ()=>{
                             onLoggedIn: onLoggedIn
                         }, void 0, false, {
                             fileName: "src/App.jsx",
-                            lineNumber: 125,
+                            lineNumber: 126,
                             columnNumber: 39
                         }, void 0)
                     }, void 0, false, {
                         fileName: "src/App.jsx",
-                        lineNumber: 125,
+                        lineNumber: 126,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                         path: "/signup",
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                             fileName: "src/App.jsx",
-                            lineNumber: 126,
+                            lineNumber: 127,
                             columnNumber: 40
                         }, void 0)
                     }, void 0, false, {
                         fileName: "src/App.jsx",
-                        lineNumber: 126,
+                        lineNumber: 127,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/App.jsx",
-                lineNumber: 78,
+                lineNumber: 79,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/App.jsx",
-        lineNumber: 76,
+        lineNumber: 77,
         columnNumber: 5
     }, undefined);
 };
@@ -16346,7 +16347,7 @@ const MainView = ({ user, token, onLoggedOut, setUser })=>{
     const [genreFilter, setGenreFilter] = (0, _react.useState)("");
     const [directorFilter, setDirectorFilter] = (0, _react.useState)("");
     (0, _react.useEffect)(()=>{
-        fetch(`http://localhost:8080/movies`, {
+        fetch(`https://movie-api-w67x.onrender.com/movies`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -16560,7 +16561,6 @@ const MainView = ({ user, token, onLoggedOut, setUser })=>{
                         lg: 3,
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                             movie: movie,
-                            favoriteMovieIds: user?.FavoriteMovies || [],
                             user: user,
                             token: token,
                             setUser: setUser
@@ -16636,7 +16636,7 @@ const LoginView = ({ onLoggedIn })=>{
         }
         setLoading(true);
         setMessage("");
-        fetch(`http://localhost:8080/login`, {
+        fetch(`https://movie-api-w67x.onrender.com/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -33007,7 +33007,7 @@ const SignupView = ()=>{
             email,
             birthday
         });
-        fetch(`http://localhost:8080/users`, {
+        fetch(`https://movie-api-w67x.onrender.com/users`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -33243,9 +33243,9 @@ var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 const MovieCard = ({ movie, favoriteMovieIds, user, token, setUser })=>{
-    const isFavorite = (favoriteMovieIds || []).includes(movie._id);
+    const isFavorite = (user?.favoriteMovies || []).includes(movie._id);
     const toggleFavorite = ()=>{
-        const url = `http://localhost:8080/users/${user.Username}/movies/${movie._id}`;
+        const url = `https://movie-api-w67x.onrender.com/users/${user.username}/movies/${movie._id}`;
         const method = isFavorite ? 'DELETE' : 'POST';
         fetch(url, {
             method: method,
@@ -33377,7 +33377,6 @@ MovieCard.propTypes = {
             deathYear: (0, _propTypesDefault.default).number
         })
     }).isRequired,
-    favoriteMovieIds: (0, _propTypesDefault.default).array.isRequired,
     user: (0, _propTypesDefault.default).object.isRequired,
     token: (0, _propTypesDefault.default).string.isRequired,
     setUser: (0, _propTypesDefault.default).func.isRequired
@@ -39786,13 +39785,13 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _s = $RefreshSig$();
-const MovieView = ({ token, user, onUserUpdate })=>{
+const MovieView = ({ token, user, setUser })=>{
     _s();
     const { movieId } = (0, _reactRouterDom.useParams)();
     const navigate = (0, _reactRouterDom.useNavigate)();
     const [movie, setMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
-        fetch(`http://localhost:8080/movies/id/${movieId}`, {
+        fetch(`https://movie-api-w67x.onrender.com/movies/id/${movieId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -39891,10 +39890,10 @@ const MovieView = ({ token, user, onUserUpdate })=>{
                                     console.log("User object completo:", user);
                                     console.log("Movie ID:", movie._id);
                                     console.log("Movie object completo:", movie);
-                                    const url = `http://localhost:8080/users/${user.username}/movies/${movie._id}`;
+                                    const url = `https://movie-api-w67x.onrender.com/users/${user.username}/movies/${movie._id}`;
                                     console.log("URL que voy a usar:", url);
                                     console.log("=== FIN DEBUGGING ===");
-                                    fetch(`http://localhost:8080/users/${user.username}/movies/${movie._id}`, {
+                                    fetch(`https://movie-api-w67x.onrender.com/users/${user.username}/movies/${movie._id}`, {
                                         method: 'POST',
                                         headers: {
                                             Authorization: `Bearer ${token}`,
@@ -39906,7 +39905,7 @@ const MovieView = ({ token, user, onUserUpdate })=>{
                                         return response.json();
                                     }).then((updatedUser)=>{
                                         console.log("Updated user:", updatedUser);
-                                        onUserUpdate(updatedUser);
+                                        setUser(updatedUser);
                                         alert("Movie added to favorites!");
                                     }).catch((err)=>{
                                         console.error("Error completo:", err);
@@ -39962,7 +39961,7 @@ _s(MovieView, "VMe8CsmxjR0zH4sul1NWN89bamw=", false, function() {
 _c = MovieView;
 MovieView.propTypes = {
     token: (0, _propTypesDefault.default).string.isRequired,
-    onUserUpdate: (0, _propTypesDefault.default).func.isRequired
+    setUser: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "MovieView");
@@ -40012,7 +40011,7 @@ const ProfileView = ({ user, token, movies, onLoggedOut })=>{
     ]);
     const handleUpdate = (e)=>{
         e.preventDefault();
-        fetch(`http://localhost:8080/users/${user.username}`, {
+        fetch(`https://movie-api-w67x.onrender.com/users/${user.username}`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -40040,7 +40039,7 @@ const ProfileView = ({ user, token, movies, onLoggedOut })=>{
     };
     const handleDeregister = ()=>{
         if (!confirm("Are you sure you want to delete your account?")) return;
-        fetch(`http://localhost:8080/users/${user.username}`, {
+        fetch(`https://movie-api-w67x.onrender.com/users/${user.username}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -40053,7 +40052,7 @@ const ProfileView = ({ user, token, movies, onLoggedOut })=>{
         }).catch((error)=>console.error(error));
     };
     const removeFavorite = (movieId)=>{
-        fetch(`http://localhost:8080/users/${user.username}/movies/${movieId}`, {
+        fetch(`https://movie-api-w67x.onrender.com/users/${user.username}/movies/${movieId}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`

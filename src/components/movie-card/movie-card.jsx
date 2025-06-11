@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { Heart, HeartFill } from 'react-bootstrap-icons';
 
 export const MovieCard = ({ movie, favoriteMovieIds, user, token, setUser }) => {
-  const isFavorite = (favoriteMovieIds || []).includes(movie._id);
+  const isFavorite = (user?.favoriteMovies || []).includes(movie._id);
 
   const toggleFavorite = () => {
-    const url = `https://movie-api-w67x.onrender.com/users/${user.Username}/movies/${movie._id}`;
+    const url = `https://movie-api-w67x.onrender.com/users/${user.username}/movies/${movie._id}`;
     const method = isFavorite ? 'DELETE' : 'POST';
 
     fetch(url, {
@@ -84,7 +84,6 @@ MovieCard.propTypes = {
       deathYear: PropTypes.number
     })
   }).isRequired,
-  favoriteMovieIds: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
   token: PropTypes.string.isRequired,
   setUser: PropTypes.func.isRequired
