@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Card, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
+export const ProfileView = ({ user, token, movies, onLoggedOut, setUser }) => {
   if (!user) return <div>Loading...</div>;
 
   const [username, setUsername] = useState(user.username || "");
@@ -85,12 +85,20 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
     )
       .then((response) => {
         if (response.ok) {
-          setFavoriteMovies(favoriteMovies.filter((m) => m._id !== movieId));
+          return response.json();
         } else {
-          alert("Could not remove favorite movie.");
+          throw new Error("Could not remove favorite movie.");
         }
       })
-      .catch((error) => console.error(error));
+      .then((updatedUser) => {
+      // Actualizar tanto el estado local como el usuario principal
+      setFavoriteMovies(favoriteMovies.filter((m) => m._id !== movieId));
+      setUser(updatedUser); // Actualizar el usuario completo
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Could not remove favorite movie.");
+    });
   };
 
   return (
