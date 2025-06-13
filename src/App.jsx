@@ -100,7 +100,7 @@ const App = () => {
               <MovieView 
                 user={user} 
                 token={token}
-                onUserUpdate={updateUser}
+                setUser={updateUser}
               />
             ) : (
               <Navigate to="/login" replace />
@@ -116,6 +116,7 @@ const App = () => {
                 token={token}
                 movies={movies} // asegúrate de pasar el array correcto de películas
                 onLoggedOut={handleLogout}
+                setUser={updateUser}  
               />
             ) : (
               <Navigate to="/login" replace />
