@@ -74,7 +74,7 @@ const App = () => {
 
 
   return (
-    <Container>
+    <Container fluid className="px-2 px-md-3">
       <NavigationBar user={user} onLoggedOut={handleLogout} />
       <Routes>
         <Route

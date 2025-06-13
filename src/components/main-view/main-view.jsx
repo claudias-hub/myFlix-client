@@ -95,7 +95,7 @@ export const MainView = ({ user, token, onLoggedOut, setUser }) => {
       ) : (
         <Row>
           {filteredMovies.map((movie) => (
-            <Col key={movie._id} sm={6} md={4} lg={3}>
+            <Col key={movie._id} xs={6} sm={4} md={3} lg={3} className="mb-3">
               <MovieCard
                 movie={movie}
                 user={user}
